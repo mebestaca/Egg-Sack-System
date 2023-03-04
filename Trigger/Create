@@ -1,0 +1,83 @@
+Egg Sack Create
+
+    Events
+
+        Time - ES_Timer expires
+
+    Conditions
+
+    Actions
+
+        -------- enumerates region --------
+
+        For each (Integer ES_RegionLooper) from 1 to ES_NumberOfRegions, do (Actions)
+
+            Loop - Actions
+
+                Set ES_TempGroup = (Units in ES_SpawnRegions[ES_RegionLooper])
+
+                -------- enumerates region --------
+
+                For each (Integer ES_TypeLooper) from 1 to ES_NumberOfSackType, do (Actions)
+
+                    Loop - Actions
+
+                        -------- count egg sack --------
+
+                        Unit Group - Pick every unit in ES_TempGroup and do (Actions)
+
+                            Loop - Actions
+
+                                Set ES_Picked = (Picked unit)
+
+                                If (All Conditions are True) then do (Then Actions) else do (Else Actions)
+
+                                    If - Conditions
+
+                                        (ES_Picked is alive) Equal to True
+
+                                        (Unit-type of ES_Picked) Equal to ES_SackType[ES_TypeLooper]
+
+                                    Then - Actions
+
+                                        Unit Group - Add ES_Picked to ES_ValidGroup
+
+                                    Else - Actions
+
+                                        Set ES_Picked = No unit
+
+                Set ES_SackCount = (Number of units in ES_ValidGroup)
+
+                Unit Group - Remove all units from ES_ValidGroup
+
+                Custom script:   call DestroyGroup(udg_ES_TempGroup)
+
+                -------- checks if the sacks are maxed --------
+
+                If (All Conditions are True) then do (Then Actions) else do (Else Actions)
+
+                    If - Conditions
+
+                        ES_SackCount Less than ES_MaxSacksInRegion[ES_RegionLooper]
+
+                    Then - Actions
+
+                        Set ES_MissingSack = (ES_MaxSacksInRegion[ES_RegionLooper] - ES_SackCount)
+
+                        For each (Integer ES_SackLooper) from 1 to ES_MissingSack, do (Actions)
+
+                            Loop - Actions
+
+                                Set ES_TypeIndex = (Random integer number between 1 and ES_NumberOfSackType)
+
+                                Set ES_CreatePoint = (Random point in ES_SpawnRegions[ES_RegionLooper])
+
+                                Unit - Create 1 ES_SackType[ES_TypeIndex] for ES_SpiderPlayer at ES_CreatePoint facing (Random angle) degrees
+
+                                Unit Group - Add (Last created unit) to ES_SackGroup
+
+                                Custom script:   call RemoveLocation(udg_ES_CreatePoint)
+
+                    Else - Actions
+
+        Trigger - Turn off (This trigger)
