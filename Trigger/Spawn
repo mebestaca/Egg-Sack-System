@@ -1,0 +1,55 @@
+Egg Sack Spawn
+
+    Events
+
+        Unit - A unit Dies
+
+    Conditions
+
+        ((Triggering unit) is in ES_SackGroup) Equal to True
+
+    Actions
+
+        Set ES_DestroyedSack = (Triggering unit)
+
+        -------- spawn units --------
+
+        For each (Integer ES_TypeLooper) from 1 to ES_NumberOfSackType, do (Actions)
+
+            Loop - Actions
+
+                If (All Conditions are True) then do (Then Actions) else do (Else Actions)
+
+                    If - Conditions
+
+                        (Unit-type of ES_DestroyedSack) Equal to ES_SackType[ES_TypeLooper]
+
+                    Then - Actions
+
+                        Set ES_SpawnCount = (Random integer number between ES_SpawnMinimum[ES_TypeLooper] and ES_SpawnMaximum[ES_TypeLooper])
+
+                        For each (Integer ES_SpawnLooper) from 1 to ES_SpawnCount, do (Actions)
+
+                            Loop - Actions
+
+                                Set ES_DestroyPoint = (Position of ES_DestroyedSack)
+
+                                Unit - Create 1 ES_SpawnType[ES_TypeLooper] for ES_SpiderPlayer at ES_DestroyPoint facing (Random angle) degrees
+
+                                Custom script:   call RemoveLocation(udg_ES_DestroyPoint)
+
+                    Else - Actions
+
+        Unit Group - Remove ES_DestroyedSack from ES_SackGroup
+
+        If (All Conditions are True) then do (Then Actions) else do (Else Actions)
+
+            If - Conditions
+
+                (Egg Sack Create <gen> is on) Equal to False
+
+            Then - Actions
+
+                Trigger - Turn on Egg Sack Create <gen>
+
+            Else - Actions
