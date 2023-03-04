@@ -1,0 +1,109 @@
+Egg Sack Init
+
+    Events
+
+        Map initialization
+
+    Conditions
+
+    Actions
+
+        -------- number of egg sack unit types --------
+
+        Set ES_NumberOfSackType = 6
+
+        -------- register all egg sacks --------
+
+        Set ES_SackType[1] = Egg Sack (small 1)
+
+        Set ES_SackType[2] = Egg Sack (small 2)
+
+        Set ES_SackType[3] = Egg Sack (medium 1)
+
+        Set ES_SackType[4] = Egg Sack (medium 2)
+
+        Set ES_SackType[5] = Egg Sack (large 1)
+
+        Set ES_SackType[6] = Egg Sack (large 2)
+
+        -------- spiders spawned after the egg sack is destroyed --------
+
+        Set ES_SpawnType[1] = Spider (small)
+
+        Set ES_SpawnType[2] = Spider (small)
+
+        Set ES_SpawnType[3] = Spider (medium)
+
+        Set ES_SpawnType[4] = Spider (medium)
+
+        Set ES_SpawnType[5] = Spider (large)
+
+        Set ES_SpawnType[6] = Spider (large)
+
+        -------- minimum amount of units spawned --------
+
+        Set ES_SpawnMinimum[1] = 2
+
+        Set ES_SpawnMinimum[2] = 2
+
+        Set ES_SpawnMinimum[3] = 1
+
+        Set ES_SpawnMinimum[4] = 1
+
+        Set ES_SpawnMinimum[5] = 1
+
+        Set ES_SpawnMinimum[6] = 1
+
+        -------- maximum amount of units spawned --------
+
+        Set ES_SpawnMaximum[1] = 4
+
+        Set ES_SpawnMaximum[2] = 4
+
+        Set ES_SpawnMaximum[3] = 3
+
+        Set ES_SpawnMaximum[4] = 3
+
+        Set ES_SpawnMaximum[5] = 2
+
+        Set ES_SpawnMaximum[6] = 2
+
+        -------- number of regions --------
+
+        Set ES_NumberOfRegions = 4
+
+        -------- register regions --------
+
+        Set ES_SpawnRegions[1] = Region 1 <gen>
+
+        Set ES_SpawnRegions[2] = Region 2 <gen>
+
+        Set ES_SpawnRegions[3] = Region 3 <gen>
+
+        Set ES_SpawnRegions[4] = Region 4 <gen>
+
+        -------- maximum sacks in region --------
+
+        Set ES_MaxSacksInRegion[1] = 20
+
+        Set ES_MaxSacksInRegion[2] = 20
+
+        Set ES_MaxSacksInRegion[3] = 20
+
+        Set ES_MaxSacksInRegion[4] = 20
+
+        -------- host player --------
+
+        Set ES_SpiderPlayer = Player 2 (Blue)
+
+        -------- interval before creating more sacks --------
+
+        Set ES_TimerInterval = 45.00
+
+        -------- timer start --------
+
+        Countdown Timer - Start ES_Timer as a Repeating timer that will expire in ES_TimerInterval seconds
+
+        -------- spawn egg sacks --------
+
+        Trigger - Run Egg Sack Create <gen> (checking conditions)
